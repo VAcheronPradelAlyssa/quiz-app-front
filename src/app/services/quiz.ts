@@ -2,13 +2,14 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Quiz, Question } from '../models';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuizService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = 'http://localhost:8080/api/quizzes';
+  private readonly apiUrl = `${environment.apiUrl}/api/quizzes`;
 
   // Quiz endpoints
   getAllQuizzes(): Observable<Quiz[]> {

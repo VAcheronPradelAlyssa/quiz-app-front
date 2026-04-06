@@ -53,4 +53,4 @@ Une application de quiz moderne, interactive et accessible, conçue pour impress
 - TypeScript strict
 - SCSS modulaire
 - Vitest (tests unitaires)
-- API REST (backend à brancher sur http://localhost:8080)
+- API REST (backend local sur http://localhost:8080, production sur https://quizappback-cezk.onrender.com)
