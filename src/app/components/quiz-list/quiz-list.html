@@ -17,6 +17,12 @@
 					<h2>{{ quiz.title }}</h2>
 					<p>{{ quiz.questions.length }} question(s)</p>
 
+					@if (quiz.id !== undefined) {
+						<a class="play-link" [routerLink]="['/quiz', quiz.id]">Jouer ce quiz</a>
+					} @else {
+						<p class="missing-id">Quiz non jouable (id absent)</p>
+					}
+
 					@if (quiz.questions.length > 0) {
 						<ol class="questions" aria-label="Questions du quiz">
 							@for (question of quiz.questions; track question.id ?? question.text) {

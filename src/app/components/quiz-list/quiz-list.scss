@@ -72,6 +72,31 @@ h1 {
 	color: #334155;
 }
 
+.play-link {
+	display: inline-block;
+	margin-bottom: 0.75rem;
+	border: 1px solid #0f172a;
+	background: #0f172a;
+	color: #ffffff;
+	text-decoration: none;
+	padding: 0.5rem 0.875rem;
+	border-radius: 0.5rem;
+}
+
+.play-link:hover {
+	background: #1e293b;
+}
+
+.play-link:focus-visible {
+	outline: 3px solid #60a5fa;
+	outline-offset: 2px;
+}
+
+.missing-id {
+	color: #991b1b;
+	font-weight: 600;
+}
+
 .questions {
 	margin: 0;
 	padding-left: 1.25rem;

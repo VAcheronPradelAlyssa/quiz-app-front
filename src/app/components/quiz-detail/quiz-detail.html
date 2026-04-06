@@ -1,1 +1,74 @@
-<p>quiz-detail works!</p>
+<section class="quiz-detail" aria-labelledby="quiz-title">
+	<header class="quiz-detail__header">
+		<button type="button" class="back-btn" (click)="backToList()">Retour a la liste</button>
+
+		@if (quiz()) {
+			<h1 id="quiz-title">{{ quiz()!.title }}</h1>
+		} @else {
+			<h1 id="quiz-title">Quiz</h1>
+		}
+	</header>
+
+	@if (loading()) {
+		<p class="status" role="status" aria-live="polite">Chargement du quiz...</p>
+	} @else if (error()) {
+		<p class="status status--error" role="alert">{{ error() }}</p>
+	} @else if (!quiz() || totalQuestions() === 0) {
+		<p class="status" role="status">Ce quiz ne contient aucune question.</p>
+	} @else if (finished()) {
+		<article class="result" aria-live="polite">
+			<h2>Resultat</h2>
+			<p>Score: {{ score() }} / {{ totalQuestions() }}</p>
+			<p>Reponses: {{ answeredCount() }} / {{ totalQuestions() }}</p>
+
+			<div class="actions">
+				<button type="button" (click)="restartQuiz()">Rejouer</button>
+				<button type="button" (click)="backToList()">Choisir un autre quiz</button>
+			</div>
+		</article>
+	} @else {
+		<article class="question-card" aria-live="polite">
+			<p class="progress">Question {{ currentIndex() + 1 }} / {{ totalQuestions() }}</p>
+
+			@if (currentQuestion()) {
+				<h2>{{ currentQuestion()!.text }}</h2>
+
+				<fieldset>
+					<legend class="sr-only">Choisissez une reponse</legend>
+
+					<div class="options">
+						@for (option of currentQuestion()!.options; track option) {
+							<label class="option">
+								<input
+									type="radio"
+									[name]="'question-' + (currentQuestion()!.id ?? currentIndex())"
+									[checked]="selectedAnswers()[currentQuestion()!.id ?? -1] === option"
+									(change)="selectOption(currentQuestion()!.id, option)"
+								/>
+								<span>{{ option }}</span>
+							</label>
+						}
+					</div>
+				</fieldset>
+			}
+
+			<div class="actions">
+				<button type="button" (click)="previousQuestion()" [disabled]="currentIndex() === 0">
+					Precedent
+				</button>
+
+				@if (currentIndex() < totalQuestions() - 1) {
+					<button type="button" (click)="nextQuestion()">Suivant</button>
+				} @else {
+					<button
+						type="button"
+						(click)="submitQuiz()"
+						[disabled]="answeredCount() < totalQuestions()"
+					>
+						Terminer
+					</button>
+				}
+			</div>
+		</article>
+	}
+</section>
