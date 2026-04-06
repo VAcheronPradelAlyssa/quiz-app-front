@@ -1,1 +1,31 @@
-<p>quiz-list works!</p>
+<section class="quiz-list" aria-labelledby="quiz-list-title">
+	<header class="quiz-list__header">
+		<h1 id="quiz-list-title">Quiz disponibles</h1>
+		<button type="button" class="refresh-btn" (click)="loadQuizzes()">Actualiser</button>
+	</header>
+
+	@if (loading()) {
+		<p class="status" role="status" aria-live="polite">Chargement des quiz...</p>
+	} @else if (error()) {
+		<p class="status status--error" role="alert">{{ error() }}</p>
+	} @else if (quizzes().length === 0) {
+		<p class="status" role="status">Aucun quiz disponible pour le moment.</p>
+	} @else {
+		<ul class="cards" aria-label="Liste des quiz">
+			@for (quiz of quizzes(); track quiz.id ?? quiz.title) {
+				<li class="card">
+					<h2>{{ quiz.title }}</h2>
+					<p>{{ quiz.questions.length }} question(s)</p>
+
+					@if (quiz.questions.length > 0) {
+						<ol class="questions" aria-label="Questions du quiz">
+							@for (question of quiz.questions; track question.id ?? question.text) {
+								<li>{{ question.text }}</li>
+							}
+						</ol>
+					}
+				</li>
+			}
+		</ul>
+	}
+</section>
