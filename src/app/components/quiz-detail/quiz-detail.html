@@ -1,6 +1,13 @@
 <section class="quiz-detail" aria-labelledby="quiz-title">
 	<header class="quiz-detail__header">
-		<button type="button" class="back-btn" (click)="backToList()">Retour a la liste</button>
+		<div class="header-actions">
+			<button type="button" class="back-btn" (click)="backToList()">Retour a la liste</button>
+			@if (quiz()?.id !== undefined) {
+				<a class="add-question-link" [routerLink]="['/quiz', quiz()!.id, 'questions', 'new']">
+					Ajouter une question
+				</a>
+			}
+		</div>
 
 		@if (quiz()) {
 			<h1 id="quiz-title">{{ quiz()!.title }}</h1>
@@ -31,7 +38,17 @@
 			<p class="progress">Question {{ currentIndex() + 1 }} / {{ totalQuestions() }}</p>
 
 			@if (currentQuestion()) {
-				<h2>{{ currentQuestion()!.text }}</h2>
+				<div class="question-title-row">
+					<h2>{{ currentQuestion()!.text }}</h2>
+					@if (quiz()?.id !== undefined && currentQuestion()!.id !== undefined) {
+						<a
+							class="edit-question-link"
+							[routerLink]="['/quiz', quiz()!.id, 'questions', currentQuestion()!.id, 'edit']"
+						>
+							Modifier cette question
+						</a>
+					}
+				</div>
 
 				<fieldset>
 					<legend class="sr-only">Choisissez une reponse</legend>

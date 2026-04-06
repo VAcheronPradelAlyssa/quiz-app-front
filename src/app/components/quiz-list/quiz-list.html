@@ -1,7 +1,10 @@
 <section class="quiz-list" aria-labelledby="quiz-list-title">
 	<header class="quiz-list__header">
 		<h1 id="quiz-list-title">Quiz disponibles</h1>
-		<button type="button" class="refresh-btn" (click)="loadQuizzes()">Actualiser</button>
+		<div class="header-actions">
+			<a class="create-link" routerLink="/quiz/new">Creer un quiz</a>
+			<button type="button" class="refresh-btn" (click)="loadQuizzes()">Actualiser</button>
+		</div>
 	</header>
 
 	@if (loading()) {
@@ -18,7 +21,10 @@
 					<p>{{ quiz.questions.length }} question(s)</p>
 
 					@if (quiz.id !== undefined) {
-						<a class="play-link" [routerLink]="['/quiz', quiz.id]">Jouer ce quiz</a>
+						<div class="card-actions">
+							<a class="play-link" [routerLink]="['/quiz', quiz.id]">Jouer ce quiz</a>
+							<a class="edit-link" [routerLink]="['/quiz', quiz.id, 'edit']">Modifier</a>
+						</div>
 					} @else {
 						<p class="missing-id">Quiz non jouable (id absent)</p>
 					}

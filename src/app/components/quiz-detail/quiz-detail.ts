@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit, computed, inject, signal } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Quiz } from '../../models';
 import { QuizService } from '../../services/quiz';
 
 @Component({
   selector: 'app-quiz-detail',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './quiz-detail.html',
   styleUrl: './quiz-detail.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

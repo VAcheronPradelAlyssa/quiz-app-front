@@ -1,1 +1,89 @@
-<p>quiz-form works!</p>
+<section class="quiz-form" aria-labelledby="quiz-form-title">
+	<header class="quiz-form__header">
+		<h1 id="quiz-form-title">
+			@if (isEditMode()) {
+				Modifier le quiz
+			} @else {
+				Creer un quiz
+			}
+		</h1>
+
+		<a routerLink="/">Retour a la liste</a>
+	</header>
+
+	@if (loading()) {
+		<p class="status" role="status">Chargement du quiz...</p>
+	} @else {
+		@if (error()) {
+			<p class="status status--error" role="alert">{{ error() }}</p>
+		}
+
+		<form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+			<div class="field">
+				<label for="title">Titre du quiz</label>
+				<input id="title" type="text" formControlName="title" />
+				@if (form.controls.title.touched && form.controls.title.invalid) {
+					<p class="error">Le titre est obligatoire (minimum 3 caracteres).</p>
+				}
+			</div>
+
+			<div class="questions" formArrayName="questions">
+				<div class="questions-header">
+					<h2>Questions</h2>
+					<button type="button" (click)="addQuestion()">Ajouter une question</button>
+				</div>
+
+				@for (questionCtrl of questionsArray.controls; track $index; let questionIndex = $index) {
+					<article class="question-card" [formGroupName]="questionIndex">
+						<div class="question-top">
+							<h3>Question {{ questionIndex + 1 }}</h3>
+							<button type="button" (click)="removeQuestion(questionIndex)">Supprimer</button>
+						</div>
+
+						<div class="field">
+							<label [for]="'question-text-' + questionIndex">Texte</label>
+							<input [id]="'question-text-' + questionIndex" type="text" formControlName="text" />
+						</div>
+
+						<div class="field">
+							<label [for]="'question-answer-' + questionIndex">Bonne reponse</label>
+							<input [id]="'question-answer-' + questionIndex" type="text" formControlName="answer" />
+						</div>
+
+						<div class="options" formArrayName="options">
+							<h4>Options</h4>
+
+							@for (optionCtrl of optionsArrayAt(questionIndex).controls; track $index; let optionIndex = $index) {
+								<div class="option-row">
+									<input
+										[id]="'question-option-' + questionIndex + '-' + optionIndex"
+										type="text"
+										[formControlName]="optionIndex"
+										[attr.aria-label]="'Option ' + (optionIndex + 1)"
+									/>
+									<button type="button" (click)="removeOption(questionIndex, optionIndex)">
+										Retirer
+									</button>
+								</div>
+							}
+
+							<button type="button" (click)="addOption(questionIndex)">Ajouter une option</button>
+						</div>
+					</article>
+				}
+			</div>
+
+			<div class="actions">
+				<button type="submit" [disabled]="saving()">
+					@if (saving()) {
+						Enregistrement...
+					} @else if (isEditMode()) {
+						Mettre a jour
+					} @else {
+						Creer le quiz
+					}
+				</button>
+			</div>
+		</form>
+	}
+</section>

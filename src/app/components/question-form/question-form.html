@@ -1,1 +1,63 @@
-<p>question-form works!</p>
+<section class="question-form" aria-labelledby="question-form-title">
+	<header class="question-form__header">
+		<h1 id="question-form-title">
+			@if (isEditMode()) {
+				Modifier la question
+			} @else {
+				Ajouter une question
+			}
+		</h1>
+	</header>
+
+	@if (error()) {
+		<p class="status status--error" role="alert">{{ error() }}</p>
+	}
+
+	@if (loading()) {
+		<p class="status" role="status">Chargement...</p>
+	} @else {
+		<form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+			<div class="field">
+				<label for="text">Texte de la question</label>
+				<input id="text" type="text" formControlName="text" />
+			</div>
+
+			<div class="field">
+				<label for="answer">Bonne reponse</label>
+				<input id="answer" type="text" formControlName="answer" />
+			</div>
+
+			<div class="options" formArrayName="options">
+				<div class="options__header">
+					<h2>Options</h2>
+					<button type="button" (click)="addOption()">Ajouter une option</button>
+				</div>
+
+				@for (optionCtrl of optionsArray.controls; track $index; let optionIndex = $index) {
+					<div class="option-row">
+						<input
+							[id]="'option-' + optionIndex"
+							type="text"
+							[formControlName]="optionIndex"
+							[attr.aria-label]="'Option ' + (optionIndex + 1)"
+						/>
+						<button type="button" (click)="removeOption(optionIndex)">Retirer</button>
+					</div>
+				}
+			</div>
+
+			<div class="actions">
+				<a routerLink="/">Annuler</a>
+				<button type="submit" [disabled]="saving()">
+					@if (saving()) {
+						Enregistrement...
+					} @else if (isEditMode()) {
+						Mettre a jour
+					} @else {
+						Ajouter
+					}
+				</button>
+			</div>
+		</form>
+	}
+</section>
