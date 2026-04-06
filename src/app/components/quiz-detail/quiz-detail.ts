@@ -112,9 +112,13 @@ export class QuizDetail implements OnInit {
     if (questionId === undefined || this.finished()) {
       return;
     }
-
-    this.selectedAnswers.update((answers) => ({
-      ...answers,
+    // Ne pas permettre de modifier la réponse si déjà répondue
+    const answers = this.selectedAnswers();
+    if (answers[questionId] !== undefined) {
+      return;
+    }
+    this.selectedAnswers.update((oldAnswers) => ({
+      ...oldAnswers,
       [questionId]: option,
     }));
   }

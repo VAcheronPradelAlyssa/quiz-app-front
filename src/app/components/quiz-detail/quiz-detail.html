@@ -76,6 +76,7 @@
 									[name]="'question-' + (currentQuestion()!.id ?? currentIndex())"
 									[checked]="selectedAnswers()[currentQuestion()!.id ?? -1] === option"
 									(change)="selectOption(currentQuestion()!.id, option)"
+									[disabled]="isCurrentQuestionAnswered()"
 								/>
 								<span>{{ option }}</span>
 							</label>

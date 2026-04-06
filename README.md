@@ -1,59 +1,56 @@
-# QuizAppFront
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.6.
+# Quiz App Frontend
 
-## Development server
+Une application de quiz moderne, interactive et accessible, conçue pour impressionner les recruteurs et démontrer des compétences avancées en Angular, TypeScript et UX/UI.
 
-To start a local development server, run:
+## 🚀 Aperçu
 
-```bash
-ng serve
-```
+- **Angular 21+** (standalone, signals, strict typing)
+- **UX fluide et responsive**
+- **Design fun et moderne**
+- **Gestion d’état réactive**
+- **Accessibilité (WCAG AA, AXE)**
+- **Code maintenable, typé, scalable**
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🎯 Fonctionnalités principales
 
-## Code scaffolding
+- Liste des quiz dynamiques
+- Détail d’un quiz avec navigation question par question
+- Correction immédiate après chaque réponse (feedback visuel et textuel)
+- Ajout/édition/suppression de quiz et de questions
+- Formulaires réactifs robustes (Angular Reactive Forms)
+- Navigation fluide (Angular Router)
+- Appels API typés (CRUD quiz/questions)
+- Sécurité : réponses verrouillées après sélection
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🖥️ Démo rapide
 
-```bash
-ng generate component component-name
-```
+1. **Lancer le projet**
+	```bash
+	npm install
+	npm start
+	```
+	Accédez à [http://localhost:4200](http://localhost:4200)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+2. **Créer, jouer, corriger !**
+	- Créez vos quiz et questions
+	- Jouez, répondez, obtenez un feedback immédiat
+	- Recommencez ou éditez à volonté
 
-```bash
-ng generate --help
-```
 
-## Building
+## 📂 Structure du projet
 
-To build the project run:
+- `src/app/components/quiz-list` : affichage des quiz
+- `src/app/components/quiz-detail` : jeu et correction
+- `src/app/components/quiz-form` : création/édition de quiz
+- `src/app/components/question-form` : création/édition de question
+- `src/app/models` : modèles typés (Quiz, Question)
+- `src/app/services/quiz.ts` : appels API typés
 
-```bash
-ng build
-```
+## 🧑‍💻 Stack technique
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Angular 21+
+- TypeScript strict
+- SCSS modulaire
+- Vitest (tests unitaires)
+- API REST (backend à brancher sur http://localhost:8080)
