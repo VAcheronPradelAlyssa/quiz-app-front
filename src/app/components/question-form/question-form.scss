@@ -1,6 +1,6 @@
 .question-form {
 	max-width: 760px;
-	margin: 2rem auto;
+	margin: 1.5rem auto 2.5rem;
 	padding: 1rem;
 }
 
@@ -10,7 +10,8 @@
 
 h1 {
 	margin: 0;
-	font-size: 1.6rem;
+	font-size: 1.9rem;
+	letter-spacing: -0.03em;
 }
 
 form {
@@ -24,10 +25,11 @@ form {
 }
 
 input {
-	border: 1px solid #cbd5e1;
-	border-radius: 0.5rem;
+	border: 1px solid rgba(148, 163, 184, 0.5);
+	border-radius: 0.7rem;
 	padding: 0.625rem 0.75rem;
 	font: inherit;
+	background: rgba(255, 255, 255, 0.95);
 }
 
 .options {
@@ -57,12 +59,20 @@ input {
 button,
 a {
 	border: 1px solid #0f172a;
-	background: #0f172a;
+	background: linear-gradient(135deg, #0f172a, #0ea5e9);
 	color: #ffffff;
 	text-decoration: none;
 	border-radius: 0.5rem;
 	padding: 0.5rem 0.875rem;
 	cursor: pointer;
+	box-shadow: 0 10px 18px rgba(14, 165, 233, 0.16);
+	transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+button:hover,
+a:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 14px 22px rgba(14, 165, 233, 0.22);
 }
 
 a {
@@ -85,7 +95,8 @@ input:focus-visible {
 	margin: 1rem 0;
 	padding: 0.75rem;
 	border-radius: 0.5rem;
-	background: #f1f5f9;
+	background: rgba(255, 255, 255, 0.86);
+	border: 1px solid rgba(148, 163, 184, 0.28);
 }
 
 .status--error {

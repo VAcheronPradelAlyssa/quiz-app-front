@@ -1,6 +1,6 @@
 .quiz-list {
 	max-width: 960px;
-	margin: 2rem auto;
+	margin: 1.5rem auto 2.5rem;
 	padding: 1rem;
 }
 
@@ -14,7 +14,9 @@
 
 h1 {
 	margin: 0;
-	font-size: 1.75rem;
+	font-size: 2rem;
+	line-height: 1.05;
+	letter-spacing: -0.03em;
 }
 
 .header-actions {
@@ -26,15 +28,18 @@ h1 {
 .create-link {
 	display: inline-block;
 	border: 1px solid #0f172a;
-	background: #0f172a;
+	background: linear-gradient(135deg, #0f172a, #1d4ed8);
 	color: #ffffff;
 	text-decoration: none;
 	padding: 0.5rem 0.875rem;
 	border-radius: 0.5rem;
+	box-shadow: 0 10px 18px rgba(37, 99, 235, 0.18);
+	transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
 .create-link:hover {
-	background: #1e293b;
+	transform: translateY(-1px);
+	box-shadow: 0 14px 22px rgba(37, 99, 235, 0.24);
 }
 
 .create-link:focus-visible {
@@ -44,15 +49,18 @@ h1 {
 
 .refresh-btn {
 	border: 1px solid #0f172a;
-	background: #0f172a;
+	background: linear-gradient(135deg, #0f172a, #7c3aed);
 	color: #fff;
 	padding: 0.5rem 0.875rem;
 	border-radius: 0.5rem;
 	cursor: pointer;
+	box-shadow: 0 10px 18px rgba(124, 58, 237, 0.18);
+	transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
 .refresh-btn:hover {
-	background: #1e293b;
+	transform: translateY(-1px);
+	box-shadow: 0 14px 22px rgba(124, 58, 237, 0.24);
 }
 
 .refresh-btn:focus-visible {
@@ -64,7 +72,8 @@ h1 {
 	margin: 1rem 0;
 	padding: 0.75rem;
 	border-radius: 0.5rem;
-	background: #f1f5f9;
+	background: rgba(255, 255, 255, 0.85);
+	border: 1px solid rgba(148, 163, 184, 0.28);
 }
 
 .status--error {
@@ -81,10 +90,18 @@ h1 {
 }
 
 .card {
-	border: 1px solid #cbd5e1;
-	border-radius: 0.75rem;
-	padding: 1rem;
-	background: #fff;
+	border: 1px solid rgba(148, 163, 184, 0.26);
+	border-radius: 1rem;
+	padding: 1rem 1rem 0.95rem;
+	background: rgba(255, 255, 255, 0.78);
+	box-shadow: 0 16px 35px rgba(15, 23, 42, 0.08);
+	backdrop-filter: blur(10px);
+	transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 20px 44px rgba(15, 23, 42, 0.12);
 }
 
 .card h2 {
@@ -100,15 +117,18 @@ h1 {
 .play-link {
 	display: inline-block;
 	border: 1px solid #0f172a;
-	background: #0f172a;
+	background: linear-gradient(135deg, #0f172a, #0f766e);
 	color: #ffffff;
 	text-decoration: none;
 	padding: 0.5rem 0.875rem;
 	border-radius: 0.5rem;
+	transition: transform 180ms ease, box-shadow 180ms ease;
+	box-shadow: 0 10px 18px rgba(15, 118, 110, 0.18);
 }
 
 .play-link:hover {
-	background: #1e293b;
+	transform: translateY(-1px);
+	box-shadow: 0 14px 22px rgba(15, 118, 110, 0.24);
 }
 
 .play-link:focus-visible {
@@ -125,12 +145,19 @@ h1 {
 
 .edit-link {
 	display: inline-block;
-	border: 1px solid #0f172a;
-	background: #ffffff;
+	border: 1px solid #cbd5e1;
+	background: rgba(255, 255, 255, 0.9);
 	color: #0f172a;
 	text-decoration: none;
 	padding: 0.5rem 0.875rem;
 	border-radius: 0.5rem;
+	transition: transform 180ms ease, box-shadow 180ms ease;
+	box-shadow: 0 8px 16px rgba(15, 23, 42, 0.08);
+}
+
+.edit-link:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 12px 20px rgba(15, 23, 42, 0.12);
 }
 
 .edit-link:focus-visible {
@@ -146,6 +173,7 @@ h1 {
 .questions {
 	margin: 0;
 	padding-left: 1.25rem;
+	color: #475569;
 }
 
 @media (max-width: 640px) {
