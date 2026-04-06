@@ -103,15 +103,33 @@ export class QuizForm implements OnInit {
 
     const value = this.form.getRawValue();
     const payload: Omit<Quiz, 'id'> = {
-      title: value.title ?? '',
+      title: (value.title ?? '').trim(),
       questions: value.questions.map((q) => ({
-        text: q['text'] ?? '',
+        text: (q['text'] ?? '').trim(),
         options: (Array.isArray(q['options']) ? q['options'] : []).filter(
-          (option: unknown): option is string => typeof option === 'string'
+          (option: unknown): option is string => typeof option === 'string' && option.trim().length > 0
         ),
-        answer: q['answer'] ?? '',
+        answer: (q['answer'] ?? '').trim(),
       })),
     };
+
+    if (payload.title.length === 0) {
+      this.error.set('Le titre du quiz est obligatoire.');
+      return;
+    }
+
+    const invalidQuestion = payload.questions.find(
+      (question) =>
+        question.text.length === 0
+        || question.answer.length === 0
+        || question.options.length < 2
+        || !question.options.includes(question.answer)
+    );
+
+    if (invalidQuestion) {
+      this.error.set('Chaque question doit avoir un texte, au moins 2 options, et une reponse presente dans les options.');
+      return;
+    }
 
     this.saving.set(true);
     this.error.set('');

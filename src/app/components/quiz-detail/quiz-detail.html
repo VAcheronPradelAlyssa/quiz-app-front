@@ -53,9 +53,24 @@
 				<fieldset>
 					<legend class="sr-only">Choisissez une reponse</legend>
 
+					@if (isCurrentQuestionAnswered()) {
+						<p
+							class="answer-feedback"
+							[class.answer-feedback--correct]="currentAnswerState() === 'correct'"
+							[class.answer-feedback--incorrect]="currentAnswerState() === 'incorrect'"
+						>
+							{{ currentAnswerLabel() }}
+						</p>
+					}
+
 					<div class="options">
 						@for (option of currentQuestion()!.options; track option) {
-							<label class="option">
+							<label
+								class="option"
+								[class.option--correct]="optionState(option) === 'correct'"
+								[class.option--incorrect-selected]="optionState(option) === 'incorrect-selected'"
+								[class.option--incorrect]="optionState(option) === 'incorrect'"
+							>
 								<input
 									type="radio"
 									[name]="'question-' + (currentQuestion()!.id ?? currentIndex())"

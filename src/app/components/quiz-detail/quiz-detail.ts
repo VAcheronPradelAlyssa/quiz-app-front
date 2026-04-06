@@ -40,6 +40,40 @@ export class QuizDetail implements OnInit {
     return Object.keys(answers).length;
   });
 
+  protected readonly currentSelectedOption = computed(() => {
+    const question = this.currentQuestion();
+    if (!question || question.id === undefined) {
+      return null;
+    }
+
+    return this.selectedAnswers()[question.id] ?? null;
+  });
+
+  protected readonly currentAnswerState = computed(() => {
+    const question = this.currentQuestion();
+    const selectedOption = this.currentSelectedOption();
+
+    if (!question || selectedOption === null) {
+      return null;
+    }
+
+    return selectedOption === question.answer ? 'correct' : 'incorrect';
+  });
+
+  protected readonly currentAnswerLabel = computed(() => {
+    const state = this.currentAnswerState();
+
+    if (state === 'correct') {
+      return 'Bon';
+    }
+
+    if (state === 'incorrect') {
+      return 'Faux';
+    }
+
+    return '';
+  });
+
   protected readonly score = computed(() => {
     const currentQuiz = this.quiz();
     if (!currentQuiz) {
@@ -83,6 +117,29 @@ export class QuizDetail implements OnInit {
       ...answers,
       [questionId]: option,
     }));
+  }
+
+  protected optionState(option: string): 'correct' | 'incorrect-selected' | 'incorrect' | null {
+    const question = this.currentQuestion();
+    const selectedOption = this.currentSelectedOption();
+
+    if (!question || selectedOption === null) {
+      return null;
+    }
+
+    if (option === question.answer) {
+      return 'correct';
+    }
+
+    if (selectedOption === option && selectedOption !== question.answer) {
+      return 'incorrect-selected';
+    }
+
+    return 'incorrect';
+  }
+
+  protected isCurrentQuestionAnswered(): boolean {
+    return this.currentSelectedOption() !== null;
   }
 
   protected nextQuestion(): void {

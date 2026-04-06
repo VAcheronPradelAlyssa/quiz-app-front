@@ -94,6 +94,25 @@ fieldset {
 	gap: 0.625rem;
 }
 
+.answer-feedback {
+	margin: 0 0 0.75rem;
+	padding: 0.625rem 0.75rem;
+	border-radius: 0.5rem;
+	font-weight: 700;
+	background: #f8fafc;
+	color: #b45309;
+}
+
+.answer-feedback--correct {
+	background: #dcfce7;
+	color: #166534;
+}
+
+.answer-feedback--incorrect {
+	background: #fee2e2;
+	color: #991b1b;
+}
+
 .option {
 	display: flex;
 	align-items: center;
@@ -106,6 +125,29 @@ fieldset {
 .option:has(input:checked) {
 	border-color: #0369a1;
 	background: #f0f9ff;
+}
+
+.option--correct {
+	border-color: #16a34a;
+	background: #dcfce7;
+	color: #166534;
+}
+
+.option--incorrect-selected,
+.option--incorrect {
+	border-color: #dc2626;
+	background: #fee2e2;
+	color: #991b1b;
+}
+
+.option--incorrect-selected {
+	font-weight: 700;
+}
+
+.option--correct input,
+.option--incorrect-selected input,
+.option--incorrect input {
+	accent-color: currentColor;
 }
 
 .actions {
